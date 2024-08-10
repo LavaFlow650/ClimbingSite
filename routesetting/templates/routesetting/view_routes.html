@@ -1,0 +1,38 @@
+{% extends "routesetting/layout.html" %}
+{% block title %}
+    Routes
+{% endblock %}
+{% block content %}
+    <h2>Routes</h2>
+
+    {% if route_list %}
+        <table class="route_list">
+            <thead>
+            <tr>
+                <th>Grade</th>
+                <th>Name</th>
+                <th>Setter</th>
+                <th>Edit</th>
+                <th>Archive</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for route in route_list %}
+                <tr>
+                    <td> V{{ route.grade }}</td>
+                    <td>
+                        {{ route.name }}
+                    </td>
+                    <td>
+                        {{ route.get_setter_display }}
+                    </td>
+                    <td> <button id = "{{route.id}}" onclick="edit_route(this.id)">Edit</button> </td>
+                    <td> <button onclick="archive_route()">Archive</button> </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No messages have been logged. Use the <a href="{% url 'log' %}">Log Message form</a>.</p>
+    {% endif %}
+{% endblock %}
