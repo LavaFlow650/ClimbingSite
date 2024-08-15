@@ -25,27 +25,6 @@ class RouteListView(ListView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         return super().get_context_data(**kwargs)
 
-def poop(request):
-    return HttpResponse("pooooop")
-
-def hello_there(request, name):
-    print(request.build_absolute_uri()) #optional
-
-    return render(
-        request,
-        'routesetting/layout.html',
-        {
-            'name': name,
-            'date': datetime.now()
-        }
-    )
-
-def about(request):
-    return render(request, "routesetting/about.html")
-
-def contact(request):
-    return render(request, "routesetting/contact.html")
-
 def log_message(request):
     form = LogMessageForm(request.POST or None)
 
@@ -60,15 +39,13 @@ def log_message(request):
     
 def get_route_dic(id): 
     route_dic = vars(Route.objects.get(id=id))
-    keys_to_clean = ['_state', 'id', 'date_logged', 'archived', 'archived_date']
+    keys_to_clean = ['_state', 'archived', 'archived_date']
     for k in keys_to_clean:
         route_dic.pop(k, None)
     return route_dic
 
-def create_route(request, id=None):
-    if id:
-        route_dic = get_route_dic(id)
-    form = RouteForm(request.POST or None, initial=route_dic)
+def create_route(request):
+    form = RouteForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             route = form.save(commit=False)
@@ -80,6 +57,16 @@ def create_route(request, id=None):
         return render(request, "routesetting/create_route.html", {"form": form})
 
 def edit_route(request, route_id):
+    route_id = route_id[1:]
     route_dic = get_route_dic(route_id)
-    form = RouteForm(initial=route_dic)
-
+    form = RouteForm(request.POST or None, initial=route_dic)
+    if request.method == "POST":
+        if form.is_valid():
+            route = form.save(commit=False)
+            #route.date_logged = datetime.now()
+            route.archived = False
+            print(route.id)
+            route.save()
+            return redirect("view_routes")
+    else:
+        return render(request, "routesetting/create_route.html", {"form": form})
