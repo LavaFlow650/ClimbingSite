@@ -63,9 +63,8 @@ def edit_route(request, route_id):
     if request.method == "POST":
         if form.is_valid():
             route = form.save(commit=False)
-            #route.date_logged = datetime.now()
+            route.date_logged = route_dic["date_logged"]
             route.archived = False
-            print(route.id)
             route.save()
             return redirect("view_routes")
     else:
