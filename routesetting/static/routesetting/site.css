@@ -28,23 +28,34 @@
 
 .body-content {
     padding: 5px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 input[name=message] {
     width: 80%;
 }
 
-.message_list th,td {
+.message_list th,
+td {
     text-align: left;
     padding-right: 15px;
 }
 
-.route_list th,td {
+.route_list th,
+td {
     text-align: left;
     padding-right: 15px;
 }
 
 body {
     background-color: lightblue;
-  }
+}
+
+.graph-parent {
+    display: flex;
+}
+
+.graph-child {
+    flex: 1;
+    padding: 20px;
+}

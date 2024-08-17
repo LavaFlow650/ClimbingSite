@@ -10,4 +10,4 @@ class LogMessageForm(forms.ModelForm):
 class RouteForm(forms.ModelForm):
     class Meta:
         model = Route
-        fields = ("grade", "location", "color", "name", "setter", "date_set")
+        fields = ("grade", "location", "color", "name", "setter", "date_set",)

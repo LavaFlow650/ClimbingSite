@@ -9,6 +9,8 @@ from routesetting.forms import RouteForm
 from routesetting.models import Route
 from django.views.generic import ListView
 
+from operator import itemgetter
+
 # Create your views here.
 
 class HomeListView(ListView):
@@ -19,11 +21,29 @@ class HomeListView(ListView):
         context = super(HomeListView, self).get_context_data(**kwargs)
         return context
     
+def get_route_dist():
+    routes = list(Route.objects.values_list("grade", "color"))
+    #routes = [(2, 'W'), (2, 'W'), (2, 'W'), (6, 'LG'), (7, 'LG'), (10, 'Y'), (1, 'W')]
+    max_grade = max(routes, key=itemgetter(0))[0]
+    color_dist = {}
+    for route in routes:
+        if not route[1] in color_dist:
+            color_dist[route[1]] = [0]*(max_grade+1)
+        color_dist[route[1]][route[0]] += 1
+    return color_dist
+
 class RouteListView(ListView):
     model = Route
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        context['route_dist'] = get_route_dist()
+        context['color_lookup'] = Route.color_lookup
+        return context
+
+def routes(request):
+    route_list = {"grade": 5, "name": "meow"}
+    return render(request, "routesetting/view_routes.html", {"route_list", route_list})
 
 def log_message(request):
     form = LogMessageForm(request.POST or None)

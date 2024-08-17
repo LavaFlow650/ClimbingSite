@@ -11,8 +11,19 @@ class LogMessage(models.Model):
         return f"'{self.message}' logged on {date.strftime('%A, %d %B, %Y at %X')}"
 
 class Route(models.Model):
-    grade    = models.SmallIntegerField()
     location = models.PositiveSmallIntegerField()
+    color_lookup = {
+        "R":"D22B2B",
+        "O":"FF5F1F",
+        "Y":"FFEA00",
+        "LG":"AAFF00",
+        "DG":"355E3B",
+        "Bu":"4169E1",
+        "Pu":"9400D3",
+        "Bk":"111111",
+        "Pi":"FF00FF",
+        "W":"DDDDDD"
+    }
     class Colors(models.TextChoices):
         RED =         "R", "Red"
         ORANGE =      "O", "Orange"
@@ -48,3 +59,11 @@ class Route(models.Model):
 
     def __str__(self):
         return '{} (V{})'.format(self.name,self.grade)
+    
+class Boulder(Route):
+    grade = models.SmallIntegerField()
+
+class TopRope(Route):
+    grade = models.CharField(
+        max_length=3,
+    )

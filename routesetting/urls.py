@@ -10,9 +10,9 @@ home_list_view = views.HomeListView.as_view(
 )
 
 route_list_view = views.RouteListView.as_view(
-    queryset = Route.objects.order_by("-grade"),
+    queryset = Route.objects.filter(archived__exact=False).order_by("-grade"),
     context_object_name = "route_list",
-    template_name = "routesetting/view_routes.html"
+    template_name = "routesetting/view_routes.html",
 )
 
 urlpatterns = [
