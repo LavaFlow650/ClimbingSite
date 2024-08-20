@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import math
 
 class LogMessage(models.Model):
     message = models.CharField(max_length=300)
@@ -12,6 +13,26 @@ class LogMessage(models.Model):
 
 class Route(models.Model):
     location = models.PositiveSmallIntegerField()
+    type = models.CharField(max_length=1)
+    grade = models.IntegerField()
+
+    @property
+    def display_grade(self):
+        if self.type == "T":
+            pre = "5."
+        elif self.type == "B":
+            pre = "V"
+        else:
+            pre = "invalid route type"
+
+        mod = self.grade%10
+        if mod < 5:
+            return pre + str(int(self.grade/10))+"+"*mod
+        elif mod == 5:
+            return pre + "fuck you"
+        else:
+            return pre + str(1+math.floor(self.grade/10))+"-"*(10-mod)
+        
     color_lookup = {
         "R":"D22B2B",
         "O":"FF5F1F",
@@ -47,6 +68,10 @@ class Route(models.Model):
         OK = "O", "OK"
         TOPS = "T", "TOPS"
         FIREWX = "F", "firewx"
+        MERM = "M", "Merm"
+        SUNNY = "S", "Sunny"
+        CHALK = "C", "Chalk Snorter"
+        MAC = "MD", "McDeee"
     setter = models.CharField(
         max_length=2,
         choices = Setters.choices,
@@ -58,12 +83,4 @@ class Route(models.Model):
     archived_date = models.DateTimeField(null=True)
 
     def __str__(self):
-        return '{} (V{})'.format(self.name,self.grade)
-    
-class Boulder(Route):
-    grade = models.SmallIntegerField()
-
-class TopRope(Route):
-    grade = models.CharField(
-        max_length=3,
-    )
+        return '{} ({})'.format(self.name,self.display_grade)

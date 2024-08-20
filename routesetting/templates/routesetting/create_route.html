@@ -1,11 +1,18 @@
 {% extends "routesetting/layout.html" %}
 {% block title %}
-    Create a route
+Create a route
 {% endblock %}
 {% block content %}
-    <form method="POST" class="log-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Log</button>
-    </form>
+<div>
+    <button onclick="set_route_type('T')">top rope</button>
+    <button onclick="set_route_type('B')">boulder</button>
+</div>
+
+{% comment %} {{ form.non_field_errors }} {% endcomment %}
+
+<form method="POST" class="log-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">submit</button>
+</form>
 {% endblock %}
