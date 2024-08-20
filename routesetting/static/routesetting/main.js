@@ -40,23 +40,24 @@ function dispaly_grade(grade, type) {
 }
 
 async function display_dist(output_graph, route_list) {
-    console.log(route_list)
+    console.log(route_list);
     const color_lookup = JSON.parse(document.getElementById('color_lookup').textContent);
     //console.log(color_lookup)
     // x_axis = get_x_axis(Object.values(route_dist)[0].length - 1)
 
-    var route_dist = []
+    var route_dist = [];
     for (route of route_list) {
+        console.log(dispaly_grade(route[0], route[1]));
         var route_tick = {
-            x: dispaly_grade(route[0], route[1]),
+            x: [dispaly_grade(route[0], route[1])],
             y: [1],
             type: 'bar',
             marker: {
                 color: '#' + color_lookup[route[2]]
             },
-            hoverinfo: route[3]
-        }
-        route_dist.push(route_tick)
+            hoverinfo: "name"
+        };
+        route_dist.push(route_tick);
     }
 
     // var color_data = []
@@ -72,28 +73,32 @@ async function display_dist(output_graph, route_list) {
     //     }
     //     color_data.push(color_trace)
     // }
-    // var layout = {
-    //     barmode: 'stack',
-    //     showlegend: false,
-    //     bargap: 0.05,
-    //     //paper_bgcolor: "lightslategray",
-    //     yaxis: {
-    //         zeroline: false,
-    //         gridwidth: 1,
-    //         minor: {
-    //             tickvals: [0, 1, 2, 3, 5]
-    //         }
-    //     },
-    // };
+    var layout = {
+        barmode: 'stack',
+        showlegend: false,
+        bargap: 0.05,
+        //paper_bgcolor: "lightslategray",
+        yaxis: {
+            zeroline: false,
+            gridwidth: 1,
+            // minor: {
+            //   tickvals: [0, 1, 2, 3, 5]
+            // }
+        },
+        xaxis: {
+            "categoryorder": "array",
+            "categoryarray":  ["5.6", "5.7", "5.8", "5.9", "5.10"]
+        },
+    };
 
-    Plotly.newPlot(output_graph, color_data, layout, { staticPlot: false, responsive: false });
+    Plotly.newPlot(output_graph, route_dist, layout, { staticPlot: false, responsive: false });
     // Plotly.newPlot('boulder dist', color_data, layout, { staticPlot: true, responsive: false });
 }
 
 if (window.location.href.indexOf("view_routes") != -1) {
     const b_list = JSON.parse(document.getElementById('b_list').textContent);
     const tr_list = JSON.parse(document.getElementById('tr_list').textContent);
-    display_dist('boulder dist', b_list)
+    //display_dist('boulder dist', b_list)
     display_dist('toprope dist', tr_list)
 }
 
