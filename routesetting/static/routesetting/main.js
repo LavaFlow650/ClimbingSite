@@ -18,46 +18,45 @@ function get_x_axis(max_grade, min_grade = 0) {
     return x_axis
 }
 
-function dispaly_grade(grade_int, type) {
-    if (type == "T") {
-        var pre = "5.";
-    } else if (type == "B") {
-        var pre = "V";
+//chat gpt generated
+function dispaly_grade(grade, type) {
+    let pre;
+    if (type === "T") {
+        pre = "5.";
+    } else if (type === "B") {
+        pre = "V";
     } else {
-        var pre = "invalid route type";
+        pre = "invalid route type";
     }
 
-    var mod = grade_int % 10
+    const mod = grade % 10;
     if (mod < 5) {
-        return pre + int(grade_int / 10).toString() + "+" * mod
-    } else if (mod == 5) {
-        return pre + "fuck you"
+        return pre + Math.floor(grade / 10) + "+".repeat(mod);
+    } else if (mod === 5) {
+        return pre + "fuck you";
     } else {
-        return pre + str(1 + math.floor(grade_int / 10)) + "-" * (10 - mod)
+        return pre + (Math.floor(grade / 10) + 1) + "-".repeat(10 - mod);
     }
 }
 
 async function display_dist(output_graph, route_list) {
-    //console.log(route_list)
+    console.log(route_list)
     const color_lookup = JSON.parse(document.getElementById('color_lookup').textContent);
     //console.log(color_lookup)
     // x_axis = get_x_axis(Object.values(route_dist)[0].length - 1)
 
-    var routes = []
-    for (route in route_list) {
-        console.log(dispaly_grade(route[0], route[1]))
-    }
-    for (route in route_list) {
+    var route_dist = []
+    for (route of route_list) {
         var route_tick = {
             x: dispaly_grade(route[0], route[1]),
-            y: [2],
+            y: [1],
             type: 'bar',
             marker: {
-                color: '#' + color_lookup[route[1]]
+                color: '#' + color_lookup[route[2]]
             },
             hoverinfo: route[3]
         }
-        routes.push(route_tick)
+        route_dist.push(route_tick)
     }
 
     // var color_data = []
@@ -87,8 +86,8 @@ async function display_dist(output_graph, route_list) {
     //     },
     // };
 
-    Plotly.newPlot('toprope dist', color_data, layout, { staticPlot: false, responsive: false });
-    Plotly.newPlot('boulder dist', color_data, layout, { staticPlot: true, responsive: false });
+    Plotly.newPlot(output_graph, color_data, layout, { staticPlot: false, responsive: false });
+    // Plotly.newPlot('boulder dist', color_data, layout, { staticPlot: true, responsive: false });
 }
 
 if (window.location.href.indexOf("view_routes") != -1) {
