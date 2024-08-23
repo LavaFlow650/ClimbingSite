@@ -4,7 +4,11 @@
     <meta charset="utf-8"/>
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
+    {% if request.user_agent.is_mobile %}
+    <link rel="stylesheet" type="text/css" href="{% static 'routesetting/mobile.css' %}"/>
+    {% else %}
     <link rel="stylesheet" type="text/css" href="{% static 'routesetting/site.css' %}"/>
+    {% endif %}
     <link rel="shortcut icon" href="https://m.media-amazon.com/images/I/71vo-TtbyeL._AC_UF1000,1000_QL80_.jpg">
     <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
 </head>
@@ -14,6 +18,7 @@
     <a href="{% url 'home' %}" class="navbar-brand">Home</a>
     <a href="{% url 'new_route' %}" class="navbar-item">Setting</a>
     <a href="{% url 'view_routes' %}" class="navbar-item">Routes</a>
+    <a href="{% url 'nico' %}" class="navbar-item">Nico</a>
     {% comment %} <a href="{% url 'import' %}" class="navbar-item">Import</a> {% endcomment %}
 </div>
 

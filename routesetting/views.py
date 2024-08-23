@@ -27,6 +27,8 @@ def delete_route(request, route_id):
 def view_routes(request):
     # if request.method == "POST":
     #     Route.objects.filter(id=request.POST['delete']).delete()
+    if request.user_agent.is_mobile:
+        print("hon hon hor ")
     context = {}
     context['tr_obj'] = Route.objects.filter(archived__exact=False, type="T").order_by("grade")
     context['b_obj'] = Route.objects.filter(archived__exact=False, type="B").order_by("grade")
@@ -55,6 +57,10 @@ def edit_route(request, route_id):
             form.save()
             return redirect("view_routes")
     return render(request, "routesetting/create_route.html", {"form": form})
+
+def nico(request):
+    form = RouteForm(None)
+    return render(request, "routesetting/nico_home.html", {"form": form})
 
 # def import_routes_view(request):
 #     csv_file_path = '/Users/k1einbottle/Documents/code/Github/ClimbingSite/test.csv'  # Replace with your actual file path

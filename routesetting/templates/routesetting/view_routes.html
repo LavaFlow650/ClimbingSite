@@ -9,6 +9,10 @@ Routes
 
 {% include "routesetting/templates/route_graphs.html" %}
 
+{% if request.user_agent.is_mobile %}
+ur on a mobile device u shitter
+{% endif %}
+
 
 {% comment %} {{ tr_dist|json_script:"tr_dist" }}
 {{ b_dist|json_script:"b_dist"}}

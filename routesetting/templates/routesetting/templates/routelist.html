@@ -17,7 +17,7 @@
         <tbody>
             {% for route in route_list %}
             <tr>
-                <td> {{ route.display_grade }}</td>
+                <td> {{ route.get_setter_display }}</td>
                 <td>
                     {{ route.name }}
                 </td>

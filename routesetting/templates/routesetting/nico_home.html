@@ -1,0 +1,16 @@
+{% extends "routesetting/templates/base.html" %}
+{% block title %}
+Create a route
+{% endblock %}
+{% block content %}
+<div class="button-div">
+    <button class="button button-tr" onclick="set_route_type('T')">top rope</button>
+    <button class="button button-b" onclick="set_route_type('B')">boulder</button>
+</div>
+
+<form method="POST" class="route-form" id="route-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">submit</button>
+</form>
+{% endblock %}

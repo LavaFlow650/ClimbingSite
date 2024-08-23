@@ -1,37 +1,14 @@
 from django.db import models
+from django import forms
 from django.utils import timezone
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 import math
-
-class LogMessage(models.Model):
-    message = models.CharField(max_length=300)
-    log_date = models.DateTimeField("date logged")
-
-    def __str__(self):
-        """Returns a string representation of a message."""
-        date = timezone.localtime(self.log_date)
-        return f"'{self.message}' logged on {date.strftime('%A, %d %B, %Y at %X')}"
 
 class Route(models.Model):
     location = models.PositiveSmallIntegerField()
     type = models.CharField(max_length=1)
     grade = models.IntegerField()
-
-    @property
-    def display_grade(self):
-        if self.type == "T":
-            pre = "5."
-        elif self.type == "B":
-            pre = "V"
-        else:
-            pre = "invalid route type"
-
-        mod = self.grade%10
-        if mod < 5:
-            return pre + str(int(self.grade/10))+"+"*mod
-        elif mod == 5:
-            return pre + "fuck you"
-        else:
-            return pre + str(1+math.floor(self.grade/10))+"-"*(10-mod)
         
     color_lookup = {
         "R":"D22B2B",
@@ -83,4 +60,9 @@ class Route(models.Model):
     archived_date = models.DateTimeField(null=True)
 
     def __str__(self):
-        return '{} ({})'.format(self.name,self.display_grade)
+        return '{} ({})'.format(self.name)
+    
+class RouteFeedback(models.Model):
+    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+    sugested_grade = models.IntegerField()
+    feedback = models.CharField(max_length=350)

@@ -2,13 +2,7 @@ from typing import Any
 from django import forms
 from routesetting import models
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
-
-class LogMessageForm(forms.ModelForm):
-    class Meta:
-        model = models.LogMessage
-        fields = ("message",)   # NOTE: the trailing comma is required
 
 class GradeField(forms.Field):
     # converts string to grade int (same for tr and boulder)
@@ -47,8 +41,8 @@ class RouteTypeField(forms.CharField):
 
 
 class RouteForm(forms.ModelForm):
-    # route_type = RouteTypeField()
-    # grade = GradeField()
+    route_type = RouteTypeField()
+    grade = GradeField()
 
     def clean(self):
         super().clean()
@@ -62,8 +56,8 @@ class RouteForm(forms.ModelForm):
 
     class Meta:
         model = models.Route
-        fields = ("location", "color", "name", "setter", "date_set", "grade", "type")
+        fields = ("location", "color", "name", "setter", "date_set", "grade", "route_type")
+            # "grade": GradeField,
         field_classes = {
-            "grade": GradeField,
-            "type": RouteTypeField,
+            # "type": RouteTypeField,
         }
