@@ -41,7 +41,7 @@ class Route(models.Model):
         "DG":"355E3B",
         "Bu":"4169E1",
         "Pu":"9400D3",
-        "Bk":"111111",
+        "Bk":"333333",
         "Pi":"FF00FF",
         "W":"DDDDDD"
     }

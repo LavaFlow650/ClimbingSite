@@ -1,13 +1,13 @@
-{% extends "routesetting/layout.html" %}
+{% extends "routesetting/templates/base.html" %}
 {% block title %}
 Routes
 {% endblock %}
 {% block content %}
 
-{% include "routesetting/routelist_template.html" with route_list=tr_obj route_type="Top rope" only %}
-{% include "routesetting/routelist_template.html" with route_list=b_obj route_type="Boulder" only %}
+{% include "routesetting/templates/routelist.html" with route_list=tr_obj route_type="Top rope" only %}
+{% include "routesetting/templates/routelist.html" with route_list=b_obj route_type="Boulder" only %}
 
-{% include "routesetting/route_graphs.html" %}
+{% include "routesetting/templates/route_graphs.html" %}
 
 
 {% comment %} {{ tr_dist|json_script:"tr_dist" }}

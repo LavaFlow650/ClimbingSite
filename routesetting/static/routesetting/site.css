@@ -49,6 +49,9 @@ td {
 
 body {
     background-color: lightblue;
+    /* min-height: 100%; 
+    padding: 0; 
+    margin:0 ; */
 }
 
 .graph-parent {
