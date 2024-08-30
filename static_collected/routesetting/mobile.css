@@ -1,0 +1,26 @@
+button {
+    display: inline-block; /* Ensures the button size fits content */
+    padding: 15px 25px; /* Add padding for a larger clickable area */
+    font-size: 60px; /* Larger text for readability */
+    font-weight: bold; /* Make text stand out */
+    text-align: center; /* Center the text within the button */
+    color: #fff; /* Text color */
+    background-color: #007bff; /* Button background color */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    padding: 20px;
+    width: 60%;
+}
+
+@media (max-width: 600px) {
+    button {
+        width: 100%; /* Full width on small screens */
+        box-sizing: border-box; /* Include padding in width */
+    }
+}
+
+.route-form {
+    display: none;
+}

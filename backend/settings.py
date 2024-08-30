@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'routesetting',
+    'main',
+    #'model_testing',
     'django_user_agents',
 ]
 

@@ -19,7 +19,9 @@ from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path("", include("routesetting.urls")),
+    path("", include('main.urls')),
+    path("routesetting/", include("routesetting.urls")),
+    #path('testing/', include("model_testing.urls")),
     path('admin/', admin.site.urls),
 ]
 

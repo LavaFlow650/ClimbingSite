@@ -1,0 +1,30 @@
+{% extends "model_testing/templates/base.html" %} {% block title %} Feedback {% endblock %} {% block content %}
+<div>
+    <h2>Feedback</h2>
+
+    {% if feedback_list %}
+    <table class="feedback_list">
+        <thead>
+            <tr>
+                <th>Feedback</th>
+                <th>Route</th>
+                <th>Grade</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedback_list %}
+            <tr>
+                <td>{{ feedback.feedback }}</td>
+                <td>{{ feedback.route }}</td>
+                <td>{{ feedback.grade }}</td>
+                <td>{{ feedback.rating }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No {{route_type}}s have been set. Use the <a href="{% url 'new_route' %}">set route</a> page.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,7 +1,67 @@
 grade,location,color,name,setter,date,type
-5.10,13,Pi,The great stretch; 2H,TBear,6/12/23,T
+0,1,Bk,I'm Walkin' 'ere,T,6/11/24,B
+0,1,Pi,Princess Bubblegum,M,6/11/24,B
+0,3,Pi,In the beninning...,C,6/21/24,B
+10,2,Y,Here comes the sun,M,4/19/24,B
+10,4,Y,Sunnyside Up,M,4/29/24,B
+10,4,LG,Spring,S,5/1/24,B
+10,3,Bk,Mmm Jugs,A,4/29/24,B
+20,4,Bk,"SRAC Classic: Good Holds, Bad Angles",T,5/23/24,B
+20,1,LG,,M,6/11/24,B
+20,2,Pi,Passenger Climbcess,C,6/25/24,B
+20,1,O,An Upside down v0,T,5/14/24,B
+30,2,Bu,Bloo Raspberry Blow Pop,O,4/23/24,B
+30,3,Pu,intro to liebacking,K,4/25/24,B
+30,4,R,knee-cessary rest technique,K,4/29/24,B
+30,1,DG,"Hope You Liked ""Rosy Cheeks""",T,5/23/24,B
+30,1,R,Good things come in small boxes,T,6/11/24,B
+40,1,Bu,"""Mantle""",K,3/26/24,B
+40,3,Pi,"""They're jugs""",A,4/19/24,B
+40,4,Pu,Not another wacky start.......,K,5/14/24,B
+40,1,Y,Slopy Side Up,T,6/11/24,B
+40,2,O,Hook Line & Sinker,T,6/13/24,B
+50,2,R,Omw Bish; match,A,3/29/24,B
+50,2,Pu,tall ppl :(,K,3/29/24,B
+50,3,O,The dino-bat,K,4/25/24,B
+50,4,Pi,___,A,4/29/24,B
+50,3,LG,It's JoeVer,O,4/29/24,B
+60,2,Bk,Here we go again; 2H,K,3/29/24,B
+60,3,DG,A new challenger appreaches,A,4/29/24,B
+70,4,Bu,da proj,K,4/30/24,B
+5.10-,1,Pi,Candyland,O,3/29/24,T
+5.11,1,Pu,sry,K,08/10/24,T
+5.9+,1,Bu,unamed,T,08/10/24,T
+5.11+,2,O,NO SMEARING,K,5/23/24,T
+5.9,3,Bu,5.8 (ate) too many (foot) chips ~~~ (Bodyodyodyodyodyodyody)x7; 2H,MD,12/12/23,T
+5.11+,3,Pi,Monkie Bars,K,08/10/24,T
+5.10,4,R,"Dracula's Doom...; match, go right",MD,10/24/23,T
+5.10+,4,DG,Streeeeeetch...; match,K,8/18/23,T
+5.10,5,LG,"The mantles mason, when do they end",KB,2/27/24,T
+5.7,5,Bk,Da class,K,08/10/24,T
+5.10,6,R,Crack -> stem -> chimney(pls pls pls),K,3/19/24,T
+5.9,6,Pu,wormy lieback,K,08/10/24,T
+5.8,6,O,crack on top,K,08/10/24,T
+5.11-,7,DG,discount changing corners,K,08/10/24,T
+5.8,7,Y,unamed,A,08/10/24,T
+5.7,7,Pi,corner climbing,K,08/10/24,T
+5.9,7,Bk,,K,08/10/24,T
+5.9,8,Pi,Da kick,K,2/1/24,T
+5.12-,8,Bu,Yosemite Practice,K,2/27/24,T
+5.11-,8,LG,unamed,K,08/10/24,T
+5.11,8,O,unamed,K,08/10/24,T
+5.11-,9,Bu,Existence is pain; 2H,F,3/18/23,T
+5.11+,9,R,5.11d Smooth operator; 2H,F,7/17/23,T
+5.9,9,DG,"I hate this route, but you might not",K,08/10/24,T
+5.10-,10,Bk,For better or for worse; match,B,12/11/22,T
+5.12-,10,Y,unamed,T,08/10/24,T
+5.9+,10,O,A Perfect little monster,T,08/10/24,T
+5.11+,10,Pu,unamed,K,7/30/24,T
+5.6,11,LG,SRAC'S first jug haul,K,2/25/24,T
+5.8,12,R,unamed,K,08/10/24,T
+5.10+,12,DG,Poison ivy,ST,6/21/23,T
+5.10,13,Pi,The great stretch; 2H,TB,6/12/23,T
 5.12-,13,Bu,We're back( I'm sorry),A,4/10/24,T
 5.11,13,Bk,My Jugs are down here,K,5/7/24,T
 5.11-,13,Pu,Into the Nether,A,6/6/24,T
 5.11+,13,Bu,We're so back (I'm sry lol),A,4/12/24,T
-5.10-,13,O,Intro to moves,K,summer,T
+5.10-,13,O,Intro to moves,K,08/10/24,T

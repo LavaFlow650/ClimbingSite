@@ -1,0 +1,6 @@
+{% extends "main/templates/base.html" %} {% block title %} Create a route {% endblock %} {% block content %}
+<form method="POST" class="log-form">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">submit</button>
+</form>
+{% endblock %}

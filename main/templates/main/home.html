@@ -1,0 +1,53 @@
+{% extends "main/templates/base.html" %} {% block title %} Welcome! {% endblock %} {% block content %}
+
+<div class="title">Welcome to the SRAC climbing wall</div>
+
+<div class="fixed-bg"></div>
+
+<div>
+    <div>Eplore our {{b_num}} boulders or {{tr_num}} toprope routes</div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Boulder</th>
+                    <th>Top Rope</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Newest:</td>
+                    <td>
+                        <div class="route tooltip">
+                            {{ routes.b.newest.date_set }}
+                            <span class="tooltiptext">{{ routes.b.newest.name}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="route tooltip">
+                            {{ routes.tr.newest.date_set }}
+                            <span class="tooltiptext">{{ routes.tr.newest.name}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Oldest:</td>
+                    <td>
+                        <div class="route tooltip">
+                            {{ routes.b.oldest.date_set }}
+                            <span class="tooltiptext">{{ routes.b.oldest.name }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="route tooltip">
+                            {{ routes.tr.oldest.date_set }}
+                            <span class="tooltiptext">{{ routes.tr.oldest.name }}</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% include "routesetting/templates/route_graphs.html" %} {% endblock %}

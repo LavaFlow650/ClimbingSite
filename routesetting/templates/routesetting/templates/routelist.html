@@ -10,26 +10,20 @@
                 <th>Setter</th>
                 <th>Color</th>
                 <th>Edit</th>
-                <th>Archive</th>
+                {% comment %} <th>Archive</th> {% endcomment %}
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             {% for route in route_list %}
             <tr>
-                <td> {{ route.get_setter_display }}</td>
-                <td>
-                    {{ route.name }}
-                </td>
-                <td>
-                    {{ route.get_setter_display }}
-                </td>
-                <td>
-                    {{ route.get_color_display }}
-                </td>
-                <td> <button id="e{{route.id}}" onclick="edit_route(this.id)">Edit</button> </td>
-                <td> <button id="a{{route.id}}" onclick="archive_route(this.id)">Archive</button> </td>
-                <td> <button id="d{{route.id}}" onclick="delete_route(this.id)">Delete</button> </td>
+                <td>{{ route.grade }}</td>
+                <td>{{ route.name }}</td>
+                <td>{{ route.get_setter_display }}</td>
+                <td>{{ route.get_color_display }}</td>
+                <td><button id="e{{route.id}}" onclick="edit_route(this.id)">Edit</button></td>
+                {% comment %} <td><button id="a{{route.id}}" onclick="archive_route(this.id)">Archive</button></td> {% endcomment %}
+                <td><button id="d{{route.id}}" onclick="delete_route(this.id)">Delete</button></td>
             </tr>
             {% endfor %}
         </tbody>

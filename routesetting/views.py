@@ -9,7 +9,7 @@ from routesetting.forms import RouteForm
 
 from operator import itemgetter
 
-#from routesetting.import_routes import *
+from routesetting.import_routes import *
 
 # Create your views here.
 
@@ -17,8 +17,7 @@ def home(request):
     return render(request, "routesetting/home.html")
 
 def get_routes_list(type):
-    return list(Route.objects.filter(archived__exact=False, type=type).order_by('color').values_list("grade", "color", "name"))
-
+    return list(Route.objects.filter(archived__exact=False, type=type).order_by('color').values_list("grade_num", "color", "name"))
 
 def delete_route(request, route_id):
     Route.objects.filter(id=route_id).delete()
@@ -30,8 +29,8 @@ def view_routes(request):
     if request.user_agent.is_mobile:
         print("hon hon hor ")
     context = {}
-    context['tr_obj'] = Route.objects.filter(archived__exact=False, type="T").order_by("grade")
-    context['b_obj'] = Route.objects.filter(archived__exact=False, type="B").order_by("grade")
+    context['tr_obj'] = Route.objects.filter(archived__exact=False, type="T").order_by("grade_num")
+    context['b_obj'] = Route.objects.filter(archived__exact=False, type="B").order_by("grade_num")
     context['color_lookup'] = Route.color_lookup
     context['b_list'] = get_routes_list('B')
     context['tr_list'] = get_routes_list('T')
@@ -45,12 +44,12 @@ def create_route(request):
             route.date_logged = datetime.now()
             route.archived = False
             route.save()
-            return redirect("view_routes")  
+            return redirect("view_routes")
     return render(request, "routesetting/create_route.html", {"form": form})
 
 def edit_route(request, route_id):
     route_base = Route.objects.get(id = route_id)
-    initial = {"grade": route_base.display_grade}
+    initial = {"grade": route_base.grade}
     form = RouteForm(request.POST or None, instance=route_base, initial=initial)
     if request.method == "POST":
         if form.is_valid():
@@ -62,7 +61,7 @@ def nico(request):
     form = RouteForm(None)
     return render(request, "routesetting/nico_home.html", {"form": form})
 
-# def import_routes_view(request):
-#     csv_file_path = '/Users/k1einbottle/Documents/code/Github/ClimbingSite/test.csv'  # Replace with your actual file path
-#     import_routes(csv_file_path)
-#     return redirect('view_routes')
+def import_routes_view(request):
+    csv_file_path = '/Users/k1einbottle/Documents/code/Github/ClimbingSite/test.csv'  # Replace with your actual file path
+    import_routes(csv_file_path)
+    return redirect('view_routes')

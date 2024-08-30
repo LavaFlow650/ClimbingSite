@@ -16,9 +16,9 @@
 <body>
 <div class="navbar">
     <a href="{% url 'home' %}" class="navbar-brand">Home</a>
-    <a href="{% url 'new_route' %}" class="navbar-item">Setting</a>
+    <a href="{% url 'new_route' %}" class="navbar-item">Set</a>
     <a href="{% url 'view_routes' %}" class="navbar-item">Routes</a>
-    <a href="{% url 'nico' %}" class="navbar-item">Nico</a>
+    {% comment %} <a href="{% url 'nico' %}" class="navbar-item">Nico</a> {% endcomment %}
     {% comment %} <a href="{% url 'import' %}" class="navbar-item">Import</a> {% endcomment %}
 </div>
 
@@ -27,7 +27,7 @@
     {% endblock %}
     <hr/>
     <footer>
-        <p>&copy; 2019</p>
+        {% comment %} <p>&copy; 2024</p> {% endcomment %}
     </footer>
 </div>
 

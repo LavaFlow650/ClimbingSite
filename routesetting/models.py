@@ -6,9 +6,9 @@ from django.utils.translation import gettext_lazy as _
 import math
 
 class Route(models.Model):
-    location = models.PositiveSmallIntegerField()
+    location = models.PositiveSmallIntegerField(null=True,blank=True)
     type = models.CharField(max_length=1)
-    grade = models.IntegerField()
+    grade_num = models.IntegerField()
         
     color_lookup = {
         "R":"D22B2B",
@@ -20,7 +20,7 @@ class Route(models.Model):
         "Pu":"9400D3",
         "Bk":"333333",
         "Pi":"FF00FF",
-        "W":"DDDDDD"
+        "W":"DDDDDD",
     }
     class Colors(models.TextChoices):
         RED =         "R", "Red"
@@ -49,6 +49,9 @@ class Route(models.Model):
         SUNNY = "S", "Sunny"
         CHALK = "C", "Chalk Snorter"
         MAC = "MD", "McDeee"
+        TBEAR = "TB", "TBear"
+        STEELTOES = "ST", "Steel toes"
+        BLACKBEAR = "B", "Blackbear"
     setter = models.CharField(
         max_length=2,
         choices = Setters.choices,
@@ -59,10 +62,54 @@ class Route(models.Model):
     archived = models.BooleanField()
     archived_date = models.DateTimeField(null=True)
 
-    def __str__(self):
-        return '{} ({})'.format(self.name)
+    @property
+    def grade(self):
+        if self.type == "T":
+            pre = "5."
+        elif self.type == "B":
+            pre = "V"
+        else:
+            pre = "invalid route type"
+
+        mod = self.grade_num%10
+        if mod < 5:
+            return pre + str(int(self.grade_num/10))+"+"*mod
+        elif mod == 5:
+            return pre + "fuck you"
+        else:
+            return pre + str(1+math.floor(self.grade_num/10))+"-"*(10-mod)
+
+    def __str__(self) -> str:
+        return "({}) {}".format(self.grade,self.name)
+    
+    class Meta:
+        ordering = ['grade_num']
     
 class RouteFeedback(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
-    sugested_grade = models.IntegerField()
-    feedback = models.CharField(max_length=350)
+    route = models.ForeignKey(Route, on_delete=models.CASCADE, blank=True, null=True)
+    feedback = models.CharField(max_length=300, blank=True)
+    rating = models.IntegerField(null=True, blank=True)
+    grade_int = models.IntegerField(null=True, blank=True)
+    date = models.DateTimeField()
+
+    @property
+    def grade(self):
+        if self.route == None:
+            return "None"
+        if self.grade_int == None:
+            return "bad feedback"
+        
+        if self.route.type == "T":
+            pre = "5."
+        elif self.route.type == "B":
+            pre = "V"
+        else:
+            pre = "invalid route type"
+
+        mod = self.grade_int%10
+        if mod < 5:
+            return pre + str(int(self.grade_int/10))+"+"*mod
+        elif mod == 5:
+            return pre + "fuck you"
+        else:
+            return pre + str(1+math.floor(self.grade_int/10))+"-"*(10-mod)

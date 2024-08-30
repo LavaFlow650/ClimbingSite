@@ -2,17 +2,17 @@ home_url = document.location.origin;
 
 async function edit_route(id) {
     id = id.slice(1);
-    window.location.href = home_url + "/edit_route/" + id;
+    window.location.href = home_url + "/routesetting" + "/edit_route/" + id;
 }
 
 async function delete_route(id) {
     id = id.slice(1);
-    window.location.href = home_url + "/delete_route/" + id;
+    window.location.href = home_url + "/routesetting" + "/delete_route/" + id;
 }
 
 async function archive_route(id) {
     id = id.slice(1);
-    window.location.href;
+    window.location.href = home_url + "/routesetting" + "/archive_route/" + id;
 }
 
 //chat gpt generated
@@ -37,9 +37,7 @@ function dispaly_grade(grade, type = 0) {
 }
 
 function display_dist(output_graph, route_list, type) {
-    const color_lookup = JSON.parse(
-        document.getElementById("color_lookup").textContent
-    );
+    const color_lookup = JSON.parse(document.getElementById("color_lookup").textContent);
     let grades = [];
     let route_dist = [];
     for (route of route_list) {
@@ -77,6 +75,8 @@ function display_dist(output_graph, route_list, type) {
             zeroline: false,
             //gridwidth: 1,
             fixedrange: true,
+            // tickformat: ",d",
+            dtick: 1,
         },
         xaxis: {
             type: "category",

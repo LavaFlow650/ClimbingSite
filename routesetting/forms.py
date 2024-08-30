@@ -4,32 +4,51 @@ from routesetting import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-class GradeField(forms.Field):
+class GradeNumField(forms.Field):
     # converts string to grade int (same for tr and boulder)
     def to_python(self, route_str):
+        if route_str == '':
+            return None
+
         if route_str[:2] == "5.":
             route_str = route_str[2:]
+        elif route_str[:1].lower() == "v":
+            route_str = route_str[1:]
         num = 0
         for char in route_str:
             if char.isdigit():
                 num = num * 10 + int(char) * 10
-            if char == "+":
+            elif char == "+":
                 num += 1
             elif char == "-":
                 num -= 1
+            else:
+                raise ValidationError(
+                    _("Unknown character %(value)s"),
+                    code="invalid",
+                    params={"value":char}
+                )
         return num
     
     def validate(self, value: Any):
         super().validate(value)
+        if value == None:
+            return
         if value > 170:
             raise ValidationError(
                 _("Grade too large: %(value)s"), 
                 code="invalid",
                 params={"value": value},
             )
+        if value < -1:
+            raise ValidationError(
+                _("Grade too small: %(value)s"), 
+                code="invalid",
+                params={"value": value},
+            )
     
 
-class RouteTypeField(forms.CharField):
+class GradeTypeField(forms.CharField):
     def validate(self, value: Any):
         super().validate(value)
         if value != "T" and value != "B":
@@ -41,8 +60,8 @@ class RouteTypeField(forms.CharField):
 
 
 class RouteForm(forms.ModelForm):
-    route_type = RouteTypeField()
-    grade = GradeField()
+    type = GradeTypeField()
+    grade = GradeNumField()
 
     def clean(self):
         super().clean()
@@ -56,7 +75,7 @@ class RouteForm(forms.ModelForm):
 
     class Meta:
         model = models.Route
-        fields = ("location", "color", "name", "setter", "date_set", "grade", "route_type")
+        fields = ("location", "color", "name", "setter", "date_set", "grade", "type")
             # "grade": GradeField,
         field_classes = {
             # "type": RouteTypeField,
